@@ -1,9 +1,12 @@
 import pickle
 import numpy as np
 from sklearn.cluster import MiniBatchKMeans
+import os
 
-DESCRIPTORS_FILE = "../data/descriptors.pkl" # Path to stored SIFT descriptors
-KMEANS_FILE = "../data/kmeans_model.pkl" # Output file for trained k-means model
+from src.extract_sift import DATA_DIR
+
+DESCRIPTORS_FILE = os.path.join(DATA_DIR, "descriptors.pkl")  # Path to stored SIFT descriptors
+KMEANS_FILE = os.path.join(DATA_DIR, "kmeans_model.pkl")      # Output file for trained k-means model
 
 K = 700  # Size of the visual vocabulary (number of visual words)
 

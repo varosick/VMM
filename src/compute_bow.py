@@ -1,11 +1,14 @@
 import pickle
 import numpy as np
-from build_dictionary import K
+from src.build_dictionary import K
+import os
 
-DESCRIPTORS_FILE = "../data/descriptors.pkl" # File containing SIFT descriptors
-KMEANS_FILE = "../data/kmeans_model.pkl" # Trained k-means vocabulary
-IDF_FILE = "../data/idf.npy" # Output file for IDF vector
-BOW_VECTORS_FILE = "../data/bow_vectors.pkl" # Output file for BoW + TF-IDF vectors
+from src.extract_sift import DATA_DIR
+
+DESCRIPTORS_FILE = os.path.join(DATA_DIR, "descriptors.pkl")
+KMEANS_FILE = os.path.join(DATA_DIR, "kmeans_model.pkl")
+IDF_FILE = os.path.join(DATA_DIR, "idf.npy")
+BOW_VECTORS_FILE = os.path.join(DATA_DIR, "bow_vectors.pkl")
 
 
 def main():

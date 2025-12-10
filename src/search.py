@@ -1,13 +1,15 @@
 import pickle
 import numpy as np
 import json
-from extract_sift import extract_sift_from_image
-from build_dictionary import K
+from src.extract_sift import extract_sift_from_image
+from src.build_dictionary import K
+import os
 
+from src.extract_sift import DATA_DIR
 
-KMEANS_FILE = "../data/kmeans_model.pkl" # Trained k-means vocabulary
-IDF_FILE = "../data/idf.npy" # Precomputed IDF vector
-BOW_VECTORS_FILE = "../data/bow_vectors.pkl" # TF-IDF BoW vectors for all database images
+KMEANS_FILE = os.path.join(DATA_DIR, "kmeans_model.pkl")    # Trained k-means vocabulary
+IDF_FILE = os.path.join(DATA_DIR, "idf.npy")                # Precomputed IDF vector
+BOW_VECTORS_FILE = os.path.join(DATA_DIR, "bow_vectors.pkl") # TF-IDF BoW vectors for all database images
 
 
 def search_similar_image(query_image):
@@ -69,7 +71,4 @@ def search_similar_image(query_image):
 
     images = {fname : score for fname, score in results[:10]}
     return json.dumps(images)
-
-
-print(search_similar_image("query.jpg"))
 

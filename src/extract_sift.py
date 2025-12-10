@@ -2,8 +2,11 @@ import cv2
 import os
 import pickle
 
-IMAGES_DIR = "../images" # Directory containing all dataset images
-OUTPUT_DESCRIPTORS = "../data/descriptors.pkl" # File where extracted SIFT descriptors will be saved
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+IMAGES_DIR = os.path.join(PROJECT_ROOT, "images")
+DATA_DIR = os.path.join(PROJECT_ROOT, "data")
+OUTPUT_DESCRIPTORS = os.path.join(DATA_DIR, "descriptors.pkl")
 
 
 def extract_sift_from_image(path):
