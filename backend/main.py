@@ -24,13 +24,13 @@ async def upload_page(request: Request):
 
 # Приём файла + вызов search_similar_image
 @app.post("/upload")
-async def upload_file(file):
+async def upload_file(file: UploadFile = File(...)):
     file_path = os.path.join(UPLOAD_DIR, file.filename)
 
     with open(file_path, "wb") as f:
         f.write(await file.read())
 
-    # вызываем вашу функцию
+    # вызываем функцию
     result = search_similar_image(file_path)
 
     # отдаём JSON
