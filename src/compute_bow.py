@@ -20,12 +20,12 @@ def main():
     with open(KMEANS_FILE, "rb") as f:
         kmeans = pickle.load(f)
 
-    bow_vectors = {} # Will store final TF-IDF vectors for each image
+    bow_vectors = {}
     df = np.zeros(K) # Document frequency for each visual word
 
     print("Building BoW histograms...")
 
-    # STEP 1: Build raw TF histograms
+    # Build raw TF histograms
     for filename, des in descriptors_dict.items():
 
         # Assign each descriptor to the closest visual word
@@ -44,7 +44,7 @@ def main():
         # Count how many images contain each visual word at least once
         df += (hist > 0).astype(int)
 
-    # STEP 2: Compute IDF
+    # Compute IDF
     N = len(bow_vectors) # Total number of images
     # Standard IDF formula with smoothing
     idf = np.log((N + 1) / (df + 1))
@@ -54,7 +54,7 @@ def main():
     print("IDF saved:", IDF_FILE)
 
 
-    # STEP 3: Apply TF-IDF and L2 normalize
+    # Apply TF-IDF and L2 normalize
     print("Applying TF-IDF...")
 
     for filename in bow_vectors:

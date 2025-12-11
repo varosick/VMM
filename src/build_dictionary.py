@@ -5,10 +5,10 @@ import os
 
 from src.extract_sift import DATA_DIR
 
-DESCRIPTORS_FILE = os.path.join(DATA_DIR, "descriptors.pkl")  # Path to stored SIFT descriptors
-KMEANS_FILE = os.path.join(DATA_DIR, "kmeans_model.pkl")      # Output file for trained k-means model
+DESCRIPTORS_FILE = os.path.join(DATA_DIR, "descriptors.pkl")
+KMEANS_FILE = os.path.join(DATA_DIR, "kmeans_model.pkl")
 
-K = 700  # Size of the visual vocabulary (number of visual words)
+K = 700  # Size of the visual vocabulary
 
 
 def main():
@@ -16,7 +16,7 @@ def main():
     with open(DESCRIPTORS_FILE, "rb") as f:
         descriptors_dict = pickle.load(f)
 
-    all_samples = []  # Will store sampled descriptors for training k-means
+    all_samples = []
 
     print("Sampling descriptors...")
 

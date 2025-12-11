@@ -12,9 +12,6 @@ OUTPUT_DESCRIPTORS = os.path.join(DATA_DIR, "descriptors.pkl")
 def extract_sift_from_image(path):
     """
     Extracts SIFT descriptors from a single image.
-    Returns:
-        Array of SIFT descriptors (N x 128),
-        or None if no keypoints were detected.
     """
     img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)  # Read image in grayscale (required for SIFT)
 

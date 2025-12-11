@@ -7,9 +7,9 @@ import os
 
 from src.extract_sift import DATA_DIR
 
-KMEANS_FILE = os.path.join(DATA_DIR, "kmeans_model.pkl")    # Trained k-means vocabulary
-IDF_FILE = os.path.join(DATA_DIR, "idf.npy")                # Precomputed IDF vector
-BOW_VECTORS_FILE = os.path.join(DATA_DIR, "bow_vectors.pkl") # TF-IDF BoW vectors for all database images
+KMEANS_FILE = os.path.join(DATA_DIR, "kmeans_model.pkl")
+IDF_FILE = os.path.join(DATA_DIR, "idf.npy")
+BOW_VECTORS_FILE = os.path.join(DATA_DIR, "bow_vectors.pkl")
 
 
 def search_similar_image(query_image):
@@ -36,7 +36,7 @@ def search_similar_image(query_image):
         bow_db = pickle.load(f) # Dictionary: {filename: TF-IDF vector}
 
 
-    # Step 1: Build BoW for the query image
+    # Build BoW for the query image
 
     # Assign each SIFT descriptor to a visual word (cluster index)
     labels = kmeans.predict(des_query)
@@ -44,7 +44,7 @@ def search_similar_image(query_image):
     # Count occurrences of each visual word
     hist, _ = np.histogram(labels, bins=np.arange(K + 1))
 
-    # L1 normalization — convert counts to frequencies
+    # L1 normalization (convert counts to frequencies)
     hist = hist.astype(float)
     if hist.sum() > 0:
         hist /= hist.sum()
@@ -52,13 +52,13 @@ def search_similar_image(query_image):
     # TF-IDF weighting
     tfidf = hist * idf
 
-    # L2 normalization — required for cosine similarity (dot product)
+    # L2 normalization (required for cosine similarity)
     norm = np.linalg.norm(tfidf)
     if norm > 0:
         tfidf = tfidf / norm
 
 
-    # Step 2: Compare query vector to database vectors
+    # Compare query vector to database vectors
     results = []
 
     for filename, bow in bow_db.items():
